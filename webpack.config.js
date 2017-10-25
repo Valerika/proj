@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const extractCommons = new webpack.optimize.CommonsChunkPlugin({
     name: 'commons',
     filename: 'commons.js',
@@ -35,6 +35,7 @@ const config = {
         }, {
             test: /\.js$/,
             include: path.resolve(__dirname, 'src'),
+            exclude: /node_modules/,
             use: [{
                 loader: 'babel-loader',
                 options: { presets: ['es2015'] }
@@ -44,11 +45,10 @@ const config = {
     plugins: [
         new CleanWebpackPlugin(['dist']),
         new webpack.NamedModulesPlugin(),
-        new webpack.DefinePlugin({
-            PRODUCTION: JSON.stringify(true),
-        }),
-        new webpack.HotModuleReplacementPlugin(),
+        new webpack.DefinePlugin({ 'process.env.NODE_ENV': '"production"' }),
+        // new webpack.HotModuleReplacementPlugin(),
         extractCommons,
+        new UglifyJSPlugin(),
         extractCSS
     ]
 };

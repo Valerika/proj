@@ -14,7 +14,7 @@ ul li {
   cursor: pointer;
   position: relative;
   padding: 12px 8px 12px 40px;
-  background: greenyellow;
+  background: lightcoral;
   font-size: 18px;
   transition: 0.2s;
 
@@ -37,7 +37,7 @@ ul li:hover {
 
 /* When clicked on, add a background color and strike out text */
 ul li.checked {
-  background: #888;
+  background: #666;
   color: #fff;
   text-decoration: line-through;
 }
